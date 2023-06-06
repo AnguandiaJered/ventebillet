@@ -88,23 +88,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'name' => 'sometimes|string',
-            'email' => 'sometimes|string',
-            'phone' => 'sometimes|string',
-            'password' => 'sometimes|string',
-        ]);
+        // $request->validate([
+        //     'name' => 'sometimes|string',
+        //     'email' => 'sometimes|string',
+        //     'phone' => 'sometimes|string',
+        //     'password' => 'sometimes|string',
+        // ]);
 
-        $user = User::findOrFail($id);
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->phone = $request->input('phone');
-            $user->password = bcrypt($request->input('password'));
-            $user->active = true;
-            $user->verified = true;
-            $user->save();
+        //     $user = User::findOrFail($id);
+        //     $user->name = $request->input('name');
+        //     $user->email = $request->input('email');
+        //     $user->phone = $request->input('phone');
+        //     $user->password = bcrypt($request->input('password'));
+        //     $user->active = true;
+        //     $user->verified = true;
+        //     $user->save();
+
+        \DB::update("UPDATE users set name = ?, email = ?, phone = ?, password = ? WHERE id= ? ", [$request->name,$request->email,$request->phone,\bcrypt($request->password),$request->id]);
 
             return redirect(route('users.index'))->with([
                 'message' => 'Successfully updated.!',

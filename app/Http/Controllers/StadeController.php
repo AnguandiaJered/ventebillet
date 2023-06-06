@@ -86,19 +86,21 @@ class StadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'nom' => 'sometimes|string',
-            'taille' => 'sometimes|string',
-            'nbr_place' => 'sometimes|string',            
-        ]);
+        // $this->validate($request, [
+        //     'nom' => 'sometimes|string',
+        //     'taille' => 'sometimes|string',
+        //     'nbr_place' => 'sometimes|string',            
+        // ]);
     
-        $stade = new Stade;
-        $stade->nom = $request->input('nom');
-        $stade->taille = $request->input('taille');
-        $stade->nbr_place = $request->input('nbr_place');    
-        $stade->save();
+        // $stade = new Stade;
+        // $stade->nom = $request->input('nom');
+        // $stade->taille = $request->input('taille');
+        // $stade->nbr_place = $request->input('nbr_place');    
+        // $stade->save();
+
+        \DB::update("UPDATE stades set nom = ?, taille = ?, nbr_place = ? WHERE id= ? ", [$request->nom,$request->taille,$request->nbr_place,$request->id]);
 
         return redirect(route('stade.index'))->with([
             'message' => 'Successfully updated.!',

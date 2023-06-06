@@ -103,7 +103,7 @@
                                             <th>Prix</th>
                                             <th>Nombre de billets</th>
                                             <th>Date vente</th>
-                                            <th>Action</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -114,7 +114,7 @@
                                             <th>Prix</th>
                                             <th>Nombre de billets</th>
                                             <th>Date vente</th>
-                                            <th>Action</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -174,15 +174,15 @@
                                                 </div>
                                             </div>
                                             <td>{{$item->id}}</td> 
-                                            <td>{{$item->client_id}}</td>                                           
-                                            <td>{{$item->match_id}}</td>                                           
+                                            <td>{{$item->nom}}</td>                                           
+                                            <td>{{$item->date_match}}</td>                                           
                                             <td>{{$item->prix}}</td>                                           
                                             <td>{{$item->nbr_billet}}</td>                                           
                                             <td>{{$item->datevente}}</td>                                                                             
-                                            <td>
+                                            <!-- <td>
                                                 <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/vente/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
                                                 <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/vente/'.$item->id}}" class="ml-3"><i class="fa fa-trash"></i></a>                                                        
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         @endforeach
                                     </tbody>

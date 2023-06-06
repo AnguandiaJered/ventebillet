@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ EquipeController };
+use App\Http\Controllers\{ MatchController };
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +19,10 @@ use App\Http\Controllers\{ EquipeController };
 //     return $request->user();
 // });
 
-Route::controller(EquipeController::class)->group(function () {
-    Route::get('/equipe', 'index')->name('equipe.index');
-    Route::post('/equipe', 'store')->name('equipe.store');
-    Route::get('/equipe/{id}', 'edit')->name('equipe.edit');
-    Route::post('/equipe/{id}', 'update')->name('equipe.update');
-    Route::delete('/equipe/{id}', 'destroy')->name('equipe.destroy');
+Route::controller(MatchController::class)->group(function () {
+    Route::get('/match', 'index')->name('match.index');
+    Route::post('/match', 'store')->name('match.store');
+    Route::get('/match/{id}', 'edit')->name('match.edit');
+    Route::post('/match/update', 'update')->name('match.update');
+    Route::get('/match/{id}', 'destroy')->name('match.destroy');
 });

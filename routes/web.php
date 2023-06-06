@@ -97,4 +97,4 @@ Route::get('/report-vente', [DashboardController::class,'reportvente'])->name('r
 Route::get('/report-champions', [DashboardController::class,'reportchampions'])->name('reportchampions');
 Route::get('/report-paiement', [DashboardController::class,'reportpaiement'])->name('reportpaiement');
 Route::get('/report-match', [DashboardController::class,'reportmatch'])->name('reportmatch');
-Route::get('/report-billet', [DashboardController::class,'billet'])->name('billet');
+Route::get('/report-billet/{id}', [DashboardController::class,'billet'])->name('billet');

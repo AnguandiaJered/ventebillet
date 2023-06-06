@@ -18,7 +18,8 @@ class VenteController extends Controller
     {
         $client = Client::latest()->get();
         $match = Matchs::latest()->get();
-        $vente = Vente::with(['client','match'])->orderBy('id','desc')->paginate(10);
+        // $vente = Vente::with(['client','match'])->orderBy('id','desc')->paginate(10);
+        $vente = \DB::select("SELECT * FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id");
         return view('pages.vente', compact('vente','client','match'));
     }
 
@@ -90,21 +91,23 @@ class VenteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'client_id' => 'sometimes|integer',
-            'match_id' => 'sometimes|integer',
-            'prix' => 'sometimes|integer',
-            'nbr_billet' => 'sometimes|integer',
-        ]);
+        // $this->validate($request, [
+        //     'client_id' => 'sometimes|integer',
+        //     'match_id' => 'sometimes|integer',
+        //     'prix' => 'sometimes|integer',
+        //     'nbr_billet' => 'sometimes|integer',
+        // ]);
 
-        $vente = Vente::findOrFail($id);
-        $vente->client_id = $request->input('client_id');
-        $vente->match_id = $request->input('match_id');
-        $vente->prix = $request->input('prix');
-        $vente->nbr_billet = $request->input('nbr_billet');
-        $vente->save();
+        // $vente = Vente::findOrFail($id);
+        // $vente->client_id = $request->input('client_id');
+        // $vente->match_id = $request->input('match_id');
+        // $vente->prix = $request->input('prix');
+        // $vente->nbr_billet = $request->input('nbr_billet');
+        // $vente->save();
+  
+        \DB::update("UPDATE ventes set client_id = ?, match_id = ?, prix = ?, nbr_billet = ? WHERE id= ? ", [$request->client_id,$request->match_id,$request->prix,$request->nbr_billet,$request->id]);
 
         return redirect(route('vente.index'))->with([
             'message' => 'Successfully updated.!',

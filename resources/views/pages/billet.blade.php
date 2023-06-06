@@ -14,66 +14,60 @@
 
 <body onload="window.print();">  
 <div class="container-fluid vol">
-    <!-- <img class="image" src="{{ asset('img/coordination.jpg')}}" alt=""> -->
-
-<br>
-<center>
-    <h1>AGENCE DE VOYAGE <img height="200" width="300" src="{{ url('assets/cup2.png')}}" /></h1>
-    
    
-</center>
+<br>
+<!-- <center>
+    <h1><img height="200" width="300" src="{{ url('assets/cup2.png')}}" />bundesliga <img height="200" width="300" src="{{ url('assets/cup2.png')}}" /></h1> 
+   <h1>******************************</h1>
+</center> -->
 <div class="">     
-    
+    @foreach ($billet as $item)
         <div class="row">
             <div class="col-md-6">
-                <h3>Class | Classe</h3>
-                <h1>sdjhsdjsdjsdjsdj</h1>
+                <h1>YOUR TICKET</h1>
+                <h1>{{$item->client}}</h1>
             </div>           
             <div class="col-md-6">
-                <img alt="CAA" src="qrcode2.png" class="offset-4" width="250" height="130">
+                <img alt="CAA" src="{{ url('assets/qrcode2.png')}}" class="offset-4" width="250" height="130">
             </div>
         </div>
         <hr/>
         <div class="row">
-            <div class="col-md-5">
-                <h3>Flight & Date | Vol et Date</h3>
-                <h1><strong>assdsdsdjsdjhd</strong></h1>
-            </div>           
-            <div class="col-md-4">
-                <h3>Nationalité</h3>
-                <h1><strong>jhsdjsdjhsdjsd</strong></h1>
-            </div>
-            <div class="col-md-3">
-                <h3>Money | Montant payer</h3>
-                <h1><strong>jsdjsdjjhdsjh</strong></h1>
+            <div class="col-md-6">
+                <h1>GAME DATE</h1>
+                <h1><strong>{{$item->date_match}}</strong></h1>
+            </div>        
+          
+            <div class="col-md-6">
+                <h1 class="offset-5">GAME TIME</h1>
+                <h1 class="offset-4"><strong>{{$item->heure_match}}</strong></h1>
             </div>
         </div>
         <hr/>
         
         <div class="row">
             <div class="col-md-6">
-                <h3>From | De</h3>
-                <h1><strong>jhsdjsdjsdj</strong></h1>
+                <h1>TEAM TO PLAY</h1>
+                <h1><strong>{{$item->equipe_principale}}</strong> VS <strong>{{$item->equipe_adverse}}</strong></h1>
             </div>
             <div class="col-md-6">
-                <h3>To | Destination</h3>
-                <h1><strong>jhsdjsdjhsdjs</strong></h1>
+                <h1 class="offset-5">STADIUM</h1>
+                <h1 class="offset-4"><strong>{{$item->stade}}</strong></h1>
             </div>           
         </div>
         <hr/>
         <div class="row">
             <div class="col-md-6">
-                <h3>Name | Nom</h3>
-                <h1><strong>jdjjsdsjsjs</strong></h1>
+                <h1>CHAMPIONSHIP</h1>
+                <h1><strong>{{$item->champions}}</strong></h1>
             </div>
             <div class="col-md-6">
-                <h3>Airline use | A usage Interne</h3>
-                <h1>Boarding time | Heure d'embarquement : <strong>hshshshhsh</strong></h1>
+                <img height="100" class="offset-7" width="100" src="{{ url('assets/cup2.png')}}" />
+                <h3 class="offset-6">fifa.com</h3>
             </div>           
         </div>
         <hr/>
-        <h1>Boarding Pass | Carte d'accès à bord</h1>
-        <h3>musicairport.com</h3>
+        @endforeach
     </div>
 
 </div>

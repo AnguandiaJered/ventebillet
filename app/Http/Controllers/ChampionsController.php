@@ -82,17 +82,19 @@ class ChampionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'sometimes|string',
-            'country' => 'sometimes|string',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'sometimes|string',
+        //     'country' => 'sometimes|string',
+        // ]);
 
-        $champions = Champions::findOrFail($id);
-        $champions->name = $request->input('name');
-        $champions->country = $request->input('country');
-        $champions->save();
+        // $champions = Champions::findOrFail($id);
+        // $champions->name = $request->input('name');
+        // $champions->country = $request->input('country');
+        // $champions->save();
+
+        \DB::update("UPDATE champions set name = ?, country = ? WHERE id= ? ", [$request->name,$request->country,$request->id]);
 
         return redirect(route('champions.index'))->with([
             'message' => 'Successfully updated.!',

@@ -11,17 +11,21 @@ class LoginController extends Controller
 {
     public function register(Request $request)
     {
-        $this->validate($request, [
-            'nom' => 'required',
-            'taille' => 'required',
-            'nbr_place' => 'required',
+        $request->validate([
+            'name' => 'required',
+            'email' => 'sometimes|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required|min:6',
         ]);
 
-        $stade = new Stade;
-        $stade->nom = $request->input('nom');
-        $stade->taille = $request->input('taille');
-        $stade->nbr_place = $request->input('nbr_place');    
-        $stade->save();
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->phone = $request->input('phone');
+            $user->password = bcrypt($request->input('password'));
+            $user->active = true;
+            $user->verified = true;
+            $user->save();
 
         return view('pages.login');       
     }

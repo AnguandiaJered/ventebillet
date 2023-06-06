@@ -20,7 +20,8 @@ class MatchController extends Controller
         $stade = Stade::latest()->get();
         $champions = Champions::latest()->get();
         $equipe = Equipe::latest()->get();
-        $match = Matchs::with(['stade','champion'])->orderBy('id','desc')->paginate(10);
+        // $match = Matchs::with(['stade','champion'])->orderBy('id','desc')->paginate(10);
+        $match = \DB::select("SELECT * from matchs INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id");
         return view('pages.match', compact('match','stade','champions','equipe'));
     }
 
@@ -96,26 +97,28 @@ class MatchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'stade_id' => 'sometimes|integer',
-            'champions_id' => 'sometimes|integer',
-            'equipe_principale' => 'sometimes|string',
-            'equipe_adverse' => 'sometimes|string',
-            'date_match' => 'sometimes|string',
-            'heure_match' => 'sometimes|string',
-        ]);
+        // $this->validate($request, [
+        //     'stade_id' => 'sometimes|integer',
+        //     'champions_id' => 'sometimes|integer',
+        //     'equipe_principale' => 'sometimes|string',
+        //     'equipe_adverse' => 'sometimes|string',
+        //     'date_match' => 'sometimes|string',
+        //     'heure_match' => 'sometimes|string',
+        // ]);
 
-        $match = Matchs::findOrFail($id);
-        $match->stade_id = $request->input('stade_id');
-        $match->champions_id = $request->input('champions_id');
-        $match->equipe_principale = $request->input('equipe_principale');
-        $match->equipe_adverse = $request->input('equipe_adverse');
-        $match->date_match = $request->input('date_match');
-        $match->heure_match = $request->input('heure_match');
-        $match->save();
+        // $match = Matchs::findOrFail($id);
+        // $match->stade_id = $request->input('stade_id');
+        // $match->champions_id = $request->input('champions_id');
+        // $match->equipe_principale = $request->input('equipe_principale');
+        // $match->equipe_adverse = $request->input('equipe_adverse');
+        // $match->date_match = $request->input('date_match');
+        // $match->heure_match = $request->input('heure_match');
+        // $match->save();
 
+        \DB::update("UPDATE matchs set stade_id = ?, champions_id = ?, equipe_principale = ?, equipe_adverse = ?, date_match = ?, heure_match =? WHERE id= ? ", [$request->stade_id,$request->champions_id,$request->equipe_principale,$request->equipe_adverse,$request->date_match,$request->heure_match,$request->id]);
+        
         return redirect(route('match.index'))->with([
             'message' => 'Successfully updated.!',
             'alert-type' => 'success',

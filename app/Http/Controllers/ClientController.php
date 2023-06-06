@@ -88,19 +88,21 @@ class ClientController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'nom' => 'sometimes|string',
-            'adresse' => 'sometimes|string',
-            'telephone' => 'sometimes|string',
-            'mail' => 'sometimes|string',
-        ]);
+        // $this->validate($request, [
+        //     'nom' => 'sometimes|string',
+        //     'adresse' => 'sometimes|string',
+        //     'telephone' => 'sometimes|string',
+        //     'mail' => 'sometimes|string',
+        // ]);
 
-        // $client = Client::find($id);
-        $client->nom = $request->input('nom');
-        $client->adresse = $request->input('adresse');
-        $client->telephone = $request->input('telephone');
-        $client->mail = $request->input('mail');
-        $client->save();
+        // // $client = Client::find($id);
+        // $client->nom = $request->input('nom');
+        // $client->adresse = $request->input('adresse');
+        // $client->telephone = $request->input('telephone');
+        // $client->mail = $request->input('mail');
+        // $client->save();
+
+        \DB::update("UPDATE clients set nom = ?, adresse = ?, telephone = ?, mail = ? WHERE id= ? ", [$request->nom,$request->adresse,$request->telephone,$request->mail,$request->id]);
 
         return redirect(route('client.index'))->with([
             'message' => 'Successfully updated.!',

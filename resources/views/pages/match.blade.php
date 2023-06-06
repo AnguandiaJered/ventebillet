@@ -123,7 +123,7 @@
                                             <th>Equipe Adverse</th>
                                             <th>Date du match</th>
                                             <th>Heure du match</th>
-                                            <th>Action</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -134,7 +134,7 @@
                                             <th>Equipe Adverse</th>
                                             <th>Date du match</th>
                                             <th>Heure du match</th>
-                                            <th>Action</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -203,16 +203,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <td>{{$item->stade_id}}</td>
-                                            <td>{{$item->champions_id}}</td>
+                                            <td>{{$item->nom}}</td>
+                                            <td>{{$item->name}}</td>
                                             <td>{{$item->equipe_principale}}</td>
                                             <td>{{$item->equipe_adverse}}</td>
                                             <td>{{$item->date_match}}</td>
                                             <td>{{$item->heure_match}}</td>
-                                            <td>
+                                            <!-- <td>
                                                 <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/match/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
                                                 <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/match/'.$item->id}}" class="ml-3"><i class="fa fa-trash"></i></a>                                                        
-                                            </td> 
+                                            </td>  -->
                                         </tr>
                                         @endforeach 
                                     </tbody>

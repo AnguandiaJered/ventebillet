@@ -86,19 +86,21 @@ class PaiementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'vente_id' => 'sometimes|integer',
-            'montant' => 'sometimes|integer',
-            'devise' => 'sometimes|string',
-        ]);
+        // $this->validate($request, [
+        //     'vente_id' => 'sometimes|integer',
+        //     'montant' => 'sometimes|integer',
+        //     'devise' => 'sometimes|string',
+        // ]);
 
-        $paiement = new Paiement;
-        $paiement->vente_id = $request->input('vente_id');
-        $paiement->montant = $request->input('montant');
-        $paiement->devise = $request->input('devise');
-        $paiement->save();
+        // $paiement = new Paiement;
+        // $paiement->vente_id = $request->input('vente_id');
+        // $paiement->montant = $request->input('montant');
+        // $paiement->devise = $request->input('devise');
+        // $paiement->save();
+
+        \DB::update("UPDATE paiements set vente_id = ?, montant = ?, devise = ? WHERE id= ? ", [$request->vente_id,$request->montant,$request->devise,$request->id]);
 
         return redirect(route('paiement.index'))->with([
             'message' => 'Successfully updated.!',

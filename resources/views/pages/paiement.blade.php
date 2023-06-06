@@ -170,9 +170,9 @@
                                             <td>{{$item->devise}}</td>
                                             <td>{{$item->datepaie}}</td>
                                             <td>
-                                                <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/paiement/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('billet') }}" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                    class="fas fa-download fa-sm text-white-50"></i> Generate Ticket</a>
+                                                <!-- <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/paiement/'.$item->id}}".$id><i class="fa fa-edit"></i></a> -->
+                                                <a href="{{'report-billet/'.$item->id}}".$id target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                    class="fas fa-print fa-sm text-white-50"></i> Print Ticket</a>
                                             </td>
                                         </tr>
                                         @endforeach 

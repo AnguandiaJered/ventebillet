@@ -85,19 +85,21 @@ class EquipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // $this->validate($request, [
         //     'name' => 'sometimes|string',
         //     'device_name' => 'sometimes|string',
         // ]);
 
-        $equipe = Equipe::findOrFail($id);
+        // $equipe = Equipe::findOrFail($id);
         
-        $equipe->name = $request->input('name');
-        $equipe->device_name = $request->input('device_name');
+        // $equipe->name = $request->input('name');
+        // $equipe->device_name = $request->input('device_name');
 
-        $equipe->save();
+        // $equipe->save();
+
+        \DB::update("UPDATE equipes set name = ?, device_name = ? WHERE id= ? ", [$request->name,$request->device_name,$request->id]);
         
         return redirect(route('equipe.index'))->with([
             'message' => 'Successfully updated.!',

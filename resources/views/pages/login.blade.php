@@ -47,7 +47,7 @@
                                         <div class="form-group">                               
                                             <input type="submit" class="btn btn-primary btn-user btn-block" value=" Login " />
                                         </div>
-                                        <hr>
+                                        <!-- <hr> -->
                                         <!-- <a href="#" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
@@ -58,10 +58,10 @@
                                     <hr>
                                     <!-- <div class="text-center">
                                         <a class="small" href="{{ route('forgot-password')}}">Forgot Password?</a>
-                                    </div>
+                                    </div> -->
                                     <div class="text-center">
                                         <a class="small" href="{{ route('register.index')}}">Create an Account!</a>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
