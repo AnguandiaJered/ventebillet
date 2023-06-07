@@ -18,10 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('match_id');
             $table->unsignedDecimal('prix');
-            $table->integer('nbr_billet');
+            $table->unsignedBigInteger('place_id');
             $table->timestamp('datevente')->useCurrent();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('match_id')->references('id')->on('matchs');
+            $table->foreign('place_id')->references('id')->on('zonesieges');
             $table->timestamps();
             $table->softDeletes();
         });

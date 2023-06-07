@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{ EquipeController, ChampionsController, ClientController, LoginController };
 use App\Http\Controllers\{ MatchController, PaiementController, StadeController, UserController };
-use App\Http\Controllers\{ VenteController, DashboardController };
+use App\Http\Controllers\{ VenteController, DashboardController, ZonesiegeController };
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +17,23 @@ use App\Http\Controllers\{ VenteController, DashboardController };
 */
 
 Route::controller(EquipeController::class)->group(function () {
-    Route::get('/equipe', 'index')->name('equipe.index');
+    Route::get('/equipe', 'index')->middleware(['auth'])->name('equipe.index');
     Route::post('/equipe', 'store')->name('equipe.store');
     Route::get('/equipe/{id}', 'edit')->name('equipe.edit');
     Route::post('/equipe/update', 'update')->name('equipe.update');
     Route::get('/equipe/{id}', 'destroy')->name('equipe.destroy');
 });
 
+Route::controller(ZonesiegeController::class)->group(function () {
+    Route::get('/zone-siege', 'index')->middleware(['auth'])->name('zonesiege.index');
+    Route::post('/zone-siege', 'store')->name('zonesiege.store');
+    Route::get('/zone-siege/{id}', 'edit')->name('zonesiege.edit');
+    Route::post('/zone-siege/update', 'update')->name('zonesiege.update');
+    Route::get('/zone-siege/{id}', 'destroy')->name('zonesiege.destroy');
+});
+
 Route::controller(ChampionsController::class)->group(function () {
-    Route::get('/champions', 'index')->name('champions.index');
+    Route::get('/champions', 'index')->middleware(['auth'])->name('champions.index');
     Route::post('/champions', 'store')->name('champions.store');
     Route::get('/champions/{id}', 'edit')->name('champions.edit');
     Route::post('/champions/update', 'update')->name('champions.update');
@@ -33,7 +41,7 @@ Route::controller(ChampionsController::class)->group(function () {
 });
 
 Route::controller(ClientController::class)->group(function () {
-    Route::get('/client', 'index')->name('client.index');
+    Route::get('/client', 'index')->middleware(['auth'])->name('client.index');
     Route::post('/client', 'store')->name('client.store');
     Route::get('/client/{id}', 'edit')->name('client.edit');
     Route::post('/client/update', 'update')->name('client.update');
@@ -41,7 +49,7 @@ Route::controller(ClientController::class)->group(function () {
 });
 
 Route::controller(MatchController::class)->group(function () {
-    Route::get('/match', 'index')->name('match.index');
+    Route::get('/match', 'index')->middleware(['auth'])->name('match.index');
     Route::post('/match', 'store')->name('match.store');
     Route::get('/match/{id}', 'edit')->name('match.edit');
     Route::post('/match/update', 'update')->name('match.update');
@@ -49,7 +57,7 @@ Route::controller(MatchController::class)->group(function () {
 });
 
 Route::controller(PaiementController::class)->group(function () {
-    Route::get('/paiement', 'index')->name('paiement.index');
+    Route::get('/paiement', 'index')->middleware(['auth'])->name('paiement.index');
     Route::post('/paiement', 'store')->name('paiement.store');
     Route::get('/paiement/{id}', 'edit')->name('paiement.edit');
     Route::post('/paiement/update', 'update')->name('paiement.update');
@@ -57,7 +65,7 @@ Route::controller(PaiementController::class)->group(function () {
 });
 
 Route::controller(StadeController::class)->group(function () {
-    Route::get('/stade', 'index')->name('stade.index');
+    Route::get('/stade', 'index')->middleware(['auth'])->name('stade.index');
     Route::post('/stade', 'store')->name('stade.store');
     Route::get('/stade/{id}', 'edit')->name('stade.edit');
     Route::post('/stade/update', 'update')->name('stade.update');
@@ -65,7 +73,7 @@ Route::controller(StadeController::class)->group(function () {
 });
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/users', 'index')->name('users.index');
+    Route::get('/users', 'index')->middleware(['auth'])->name('users.index');
     Route::post('/users', 'store')->name('users.store');
     Route::get('/users/{id}', 'edit')->name('users.edit');
     Route::post('/users/update', 'update')->name('users.update');
@@ -73,7 +81,7 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(VenteController::class)->group(function () {
-    Route::get('/vente', 'index')->name('vente.index');
+    Route::get('/vente', 'index')->middleware(['auth'])->name('vente.index');
     Route::post('/vente', 'store')->name('vente.store');
     Route::get('/vente/{id}', 'edit')->name('vente.edit');
     Route::post('/vente/update', 'update')->name('vente.update');

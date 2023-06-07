@@ -38,31 +38,23 @@
 							    <div role="document" class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 id="exampleModalLabel" class="modal-title">Paramètrage des stades</h5>
+                                            <h5 id="exampleModalLabel" class="modal-title">Paramètrage des zones de sieges</h5>
                                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                         </div>
                                         <div class="modal-body col-md-12">						
-                                            <form id="forme" method="POST" action="{{ route('stade.store')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                            @csrf									
+                                            <form id="forme" method="POST" action="{{ route('zonesiege.store')}}" class="form-horizontal col-md-12" autocomplete="off">	
+                                            @csrf								
                                                 <div class="row">
                                                     <div class="col-md-12 mt-3">
                                                         <div class="form-group">
-                                                            <label for="nom">Entré nom</label>
-                                                            <input type="text" class="form-control" name='nom' required />
-                                                        </div>                                                        
+                                                            <label for="numsiege">Entré le numero de siege</label>
+                                                            <input type="text" class="form-control" name='numsiege' required />
+                                                        </div>                                                         
                                                         <div class="form-group">
-                                                            <label for="taille">Entré la taille</label>
-                                                            <input type="text" class="form-control" name='taille' required />
-                                                        </div> 
-                                                        <div class="form-group">
-                                                            <label for="nbr_place">Entré le nombre de place</label>
-                                                            <input type="number" class="form-control" name='nbr_place' required />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="emplacement">Entré l'emplacement</label>
-                                                            <input type="text" class="form-control" name='emplacement' required />
-                                                        </div>                                                                                                                                             
-                                                    </div>                                                                                                                   
+                                                            <label for="sectionstade">Entré la section de stade</label>
+                                                            <input type="text" class="form-control" name='sectionstade' required />
+                                                        </div>                                                                                            
+                                                    </div>                                                                                                             
                                                 </div>
                                                 <div class="form-group">                               
                                                     <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Enregistrer" />
@@ -75,12 +67,12 @@
 						</div>
                     <!-- DataTales Example -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <a href="{{ route('reportstade') }}" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            <a href="{{ route('reportchampions') }}" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                         </div>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Liste  des nos clients</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Liste des nos championnats</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -88,55 +80,46 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nom du stade</th>
-                                            <th>Taille</th>
-                                            <th>Nombre de place</th>
-                                            <th>Emplacement</th>
-                                            <th>Action</th>                                           
+                                            <th>Numero de siege</th>
+                                            <th>Section de stade</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nom du stade</th>
-                                            <th>Taille</th>
-                                            <th>Nombre de place</th>
-                                            <th>Emplacement</th>
-                                            <th>Action</th> 
+                                            <th>Numero de siege</th>
+                                            <th>Section de stade</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach ($stade as $item)
+                                    @foreach ($zonesiege as $item)
                                         <div id="edit{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
                                             <div role="document" class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 id="exampleModalLabel" class="modal-title">Paramètrage des stades</h5>
+                                                        <h5 id="exampleModalLabel" class="modal-title">Paramètrage des zones de sieges</h5>
                                                         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                                     </div>
                                                     <div class="modal-body col-md-12">						
-                                                        <form id="forme" method="POST" action="{{ route('stade.update')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                                        @csrf
-                                                        <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>									
+                                                        <form id="forme" method="POST" action="{{ route('zonesiege.update')}}" class="form-horizontal col-md-12" autocomplete="off">	
+                                                        @csrf	
+                                                            <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>								
                                                             <div class="row">
                                                                 <div class="col-md-12 mt-3">
                                                                     <div class="form-group">
-                                                                        <label for="nom">Entré nom</label>
-                                                                        <input type="text" class="form-control" name='nom' value="{{$item->nom}}" required />
-                                                                    </div>                                                        
+                                                                        <label for="numsiege">Entré nom</label>
+                                                                        <input type="text" class="form-control" name='numsiege' value="{{$item->numsiege}}" required />
+                                                                    </div>
+                                                                    
                                                                     <div class="form-group">
-                                                                        <label for="taille">Entré la taille</label>
-                                                                        <input type="text" class="form-control" name='taille' value="{{$item->taille}}" required />
-                                                                    </div> 
-                                                                    <div class="form-group">
-                                                                        <label for="nbr_place">Entré le nombre de place</label>
-                                                                        <input type="number" class="form-control" name='nbr_place' value="{{$item->nbr_place}}" required />
-                                                                    </div>  
-                                                                    <div class="form-group">
-                                                                        <label for="emplacement">Entré l'emplacement</label>
-                                                                        <input type="text" class="form-control" name='emplacement' value="{{$item->emplacement}}" required />
-                                                                    </div>                                                                                                                                           
-                                                                </div>                                                                                                                   
+                                                                        <label for="country">Entré la section du stade</label>
+                                                                        <input type="text" class="form-control" name='sectionstade' value="{{$item->sectionstade}}" required />
+                                                                    </div>                                                                                            
+                                                                </div>                                                                                                             
                                                             </div>
                                                             <div class="form-group">                               
                                                                 <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Modifier" />
@@ -145,7 +128,7 @@
                                                     </div>
                                                 </div>								                        
                                             </div>							
-                                        </div>
+                                        </div>	
                                         <tr>
                                             <div class="modal fade" id="edit{{$item->id}}">
                                                 <div class="modal-dialog modal-success">
@@ -157,17 +140,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <td>{{$item->id}}</td>
-                                            <td>{{$item->nom}}</td>
-                                            <td>{{$item->taille}}</td>
-                                            <td>{{$item->nbr_place}}</td>
-                                            <td>{{$item->emplacement}}</td>
+                                            <td>{{$item->id}}</td>                                         
+                                            <td>{{$item->numsiege}}</td>                                         
+                                            <td>{{$item->sectionstade}}</td> 
+                                            <td>{{$item->status}}</td> 
                                             <td>
-                                                <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/stade/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
-                                                <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/stade/'.$item->id}}" class="ml-3"><i class="fa fa-trash"></i></a>                                                        
-                                            </td>
+                                                <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/zone-siege/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
+                                                <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/zone-siege/'.$item->id}}" id="del" class="ml-3"><i class="fa fa-trash"></i></a>                                                        
+                                            </td>                                         
                                         </tr>
-                                        @endforeach 
+                                    @endforeach  
                                     </tbody>
                                 </table>
                             </div>

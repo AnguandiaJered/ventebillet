@@ -56,7 +56,10 @@ class LoginController extends Controller
     {
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
         {
-            return view('home');
+            return redirect(route('home'))->with([
+                'message' => 'Successfully login.!',
+                'alert-type' => 'success',
+            ]);
         }
         return view('pages.login');  
     }

@@ -69,8 +69,13 @@
                                                             <input type="number" class="form-control" name='prix' required />
                                                         </div> 
                                                         <div class="form-group">
-                                                            <label for="nbr_billet">Entré le nombre de billet</label>
-                                                            <input type="number" class="form-control" name='nbr_billet' required />
+                                                            <label for="place_id">selectionner le numero de place</label>
+                                                            <select class="form-control" name="place_id">
+                                                                <option selected="">Choose...</option>
+                                                                @foreach ($zonesiege as $item)																				
+																<option value="{{$item->id}}">{{$item->numsiege}}</option>
+																@endforeach	                                                            
+                                                            </select>
                                                         </div>                                                                                       
                                                     </div>                                                                                                              
                                                 </div>
@@ -97,22 +102,22 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <!-- <th>ID</th> -->
                                             <th>Clients</th>
                                             <th>Match</th>
                                             <th>Prix</th>
-                                            <th>Nombre de billets</th>
+                                            <th>Numero de siege</th>
                                             <th>Date vente</th>
                                             <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
+                                            <!-- <th>ID</th> -->
                                             <th>Clients</th>
                                             <th>Match</th>
                                             <th>Prix</th>
-                                            <th>Nombre de billets</th>
+                                            <th>Numero de siege</th>
                                             <th>Date vente</th>
                                             <!-- <th>Action</th> -->
                                         </tr>
@@ -149,8 +154,10 @@
                                                                         <input type="number" class="form-control" name='prix' value="{{$item->prix}}" required />
                                                                     </div> 
                                                                     <div class="form-group">
-                                                                        <label for="nbr_billet">Entré le nombre de billet</label>
-                                                                        <input type="number" class="form-control" name='nbr_billet' value="{{$item->nbr_billet}}" required />
+                                                                        <label for="place_id">selectionner le numero de place</label>
+                                                                        <select class="form-control" name="place_id" value="{{$item->place_id}}">                                                                        
+                                                                          <option value="{{$item->place_id}}">{{$item->place_id}}</option>                                                                                                                                   
+                                                                        </select>
                                                                     </div>                                                                                       
                                                                 </div>                                                                                                              
                                                             </div>
@@ -173,11 +180,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <td>{{$item->id}}</td> 
+                                            <!-- <td>{{$item->id}}</td>  -->
                                             <td>{{$item->nom}}</td>                                           
                                             <td>{{$item->date_match}}</td>                                           
                                             <td>{{$item->prix}}</td>                                           
-                                            <td>{{$item->nbr_billet}}</td>                                           
+                                            <td>{{$item->numsiege}}</td>                                           
                                             <td>{{$item->datevente}}</td>                                                                             
                                             <!-- <td>
                                                 <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/vente/'.$item->id}}".$id><i class="fa fa-edit"></i></a>

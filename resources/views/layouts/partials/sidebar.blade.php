@@ -3,9 +3,9 @@
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home')}}">
-    <!-- <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-    </div> -->
+    <div class="sidebar-brand-icon rotate-n-20">
+        <img height="30" class="#" width="25" src="{{ url('assets/cup1.png')}}" />
+    </div>
     <div class="sidebar-brand-text mx-3">Ticket System</div>
 </a>
 
@@ -57,7 +57,7 @@
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="{{ url('/match')}}">Match</a>
             <a class="collapse-item" href="{{ url('/client')}}">Clients</a>   
-            <a class="collapse-item" href="{{ url('/vente')}}">Reservations</a> 
+            <a class="collapse-item" href="{{ url('/zone-siege')}}">Zone de siege</a> 
         </div>
     </div>
 </li>
@@ -75,11 +75,12 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fas fa-fw fa-table"></i>
-        <span>Finance</span>
+        <span>Rerservation & Finance</span>
     </a>
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Comptabilité:</h6>
+            <a class="collapse-item" href="{{ url('/vente')}}">Reservations</a> 
             <a class="collapse-item" href="{{ route('paiement.index')}}">Paiements</a>             
             <div class="collapse-divider"></div>          
         </div>

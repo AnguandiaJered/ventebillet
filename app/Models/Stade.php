@@ -10,7 +10,7 @@ class Stade extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['nom','taille','nbr_place'];
+    protected $fillable = ['nom','taille','nbr_place','emplacement'];
 
     public function match()
     {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vente;
 use App\Models\Client;
 use App\Models\Matchs;
+use App\Models\Zonesiege;
 
 class VenteController extends Controller
 {
@@ -18,9 +19,10 @@ class VenteController extends Controller
     {
         $client = Client::latest()->get();
         $match = Matchs::latest()->get();
+        $zonesiege = \DB::select("SELECT * FROM `zonesieges` WHERE status='vide';");
         // $vente = Vente::with(['client','match'])->orderBy('id','desc')->paginate(10);
-        $vente = \DB::select("SELECT * FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id");
-        return view('pages.vente', compact('vente','client','match'));
+        $vente = \DB::select("SELECT * FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id INNER JOIN zonesieges on zonesieges.id=ventes.place_id");
+        return view('pages.vente', compact('vente','client','match','zonesiege'));
     }
 
     /**
@@ -45,16 +47,23 @@ class VenteController extends Controller
             'client_id' => 'required',
             'match_id' => 'required',
             'prix' => 'required',
-            'nbr_billet' => 'required',
+            'place_id' => 'required',
         ]);
 
-        $vente = new Vente;
-        $vente->client_id = $request->input('client_id');
-        $vente->match_id = $request->input('match_id');
-        $vente->prix = $request->input('prix');
-        $vente->nbr_billet = $request->input('nbr_billet');
-        $vente->save();
+        // $vente = new Vente;
+        // $vente->client_id = $request->input('client_id');
+        // $vente->match_id = $request->input('match_id');
+        // $vente->prix = $request->input('prix');
+        // $vente->place_id = $request->input('place_id');
+        // $vente->save();
 
+        \DB::statement("CALL proc_vente(?,?,?,?)",[
+            $request->client_id,
+            $request->match_id,
+            $request->prix,
+            $request->place_id
+        ]);
+        // \DB::update("UPDATE zonesieges SET status='occuper' WHERE id=: ?", [$request->place_id]);
         return redirect(route('vente.index'))->with([
             'message' => 'Successfully saved.!',
             'alert-type' => 'success',
@@ -107,7 +116,7 @@ class VenteController extends Controller
         // $vente->nbr_billet = $request->input('nbr_billet');
         // $vente->save();
   
-        \DB::update("UPDATE ventes set client_id = ?, match_id = ?, prix = ?, nbr_billet = ? WHERE id= ? ", [$request->client_id,$request->match_id,$request->prix,$request->nbr_billet,$request->id]);
+        \DB::update("UPDATE ventes set client_id = ?, match_id = ?, prix = ?, place_id = ? WHERE id= ? ", [$request->client_id,$request->match_id,$request->prix,$request->place_id,$request->id]);
 
         return redirect(route('vente.index'))->with([
             'message' => 'Successfully updated.!',

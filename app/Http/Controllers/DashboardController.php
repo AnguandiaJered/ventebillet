@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     public function billet($id)
     {
-        $billet = \DB::select("SELECT paiements.id,paiements.montant,paiements.devise,paiements.datepaie,clients.nom as client,matchs.equipe_principale,matchs.equipe_adverse,matchs.date_match,matchs.heure_match,stades.nom as stade,champions.name as champions from paiements INNER JOIN ventes on ventes.id=paiements.vente_id INNER JOIN clients on clients.id=ventes.client_id INNER JOIN matchs on matchs.id=ventes.match_id INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id WHERE paiements.id= ?;",[$id]);
+        $billet = \DB::select("SELECT paiements.id,paiements.montant,paiements.devise,paiements.datepaie,clients.nom as client,matchs.equipe_principale,matchs.equipe_adverse,matchs.date_match,matchs.heure_match,stades.nom as stade,champions.name as champions,zonesieges.numsiege,zonesieges.sectionstade from paiements INNER JOIN ventes on ventes.id=paiements.vente_id INNER JOIN clients on clients.id=ventes.client_id INNER JOIN matchs on matchs.id=ventes.match_id INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id INNER JOIN zonesieges on zonesieges.id=ventes.place_id WHERE paiements.id= ?;",[$id]);
         return view('pages.billet',compact('billet'));
     }
 
@@ -91,21 +91,21 @@ class DashboardController extends Controller
     
         $listestade = \DB::select("SELECT * FROM stades"); 
         $fpdf->SetFont('Courier', 'B', 18);
-        $fpdf->Cell(190,12,'LISTE DES STADES',1,0,'C');
+        $fpdf->Cell(195,12,'LISTE DES STADES',1,0,'C');
         $fpdf->Ln();
-        $fpdf->Cell(10,6,'ID',1,0,'C');
-        $fpdf->Cell(60,6,'NOM',1,0,'C');
-        $fpdf->Cell(60,6,'TAILLE',1,0,'C');        
-        $fpdf->Cell(60,6,'NOMBRE DE PLACE',1,0,'C');
+        $fpdf->Cell(80,6,'NOM',1,0,'C');
+        $fpdf->Cell(35,6,'TAILLE',1,0,'C');        
+        $fpdf->Cell(30,6,'PLACE',1,0,'C');
+        $fpdf->Cell(50,6,'EMPLACEMENT',1,0,'C');
         $fpdf->Ln();
         foreach($listestade as $list){
             $fpdf->SetFont('Courier', 'B', 18);
     
-            $fpdf->Cell(10,8,$list->id,1,0,'C');
-            $fpdf->Cell(60,8,$list->nom,1,0,'C');
-            $fpdf->Cell(60,8,$list->taille,1,0,'C');
+            $fpdf->Cell(80,8,$list->nom,1,0,'C');
+            $fpdf->Cell(35,8,$list->taille,1,0,'C');
             
-            $fpdf->Cell(60,8,$list->nbr_place,1,0,'C');
+            $fpdf->Cell(30,8,$list->nbr_place,1,0,'C');
+            $fpdf->Cell(50,8,$list->emplacement,1,0,'C');
             $fpdf->Ln();       
         }
         $fpdf->Output();      
@@ -144,28 +144,26 @@ class DashboardController extends Controller
         $fpdf = new Fpdf;
         $fpdf->AddPage("L");    
     
-        $listevente = \DB::select("SELECT ventes.id,clients.nom,clients.telephone,CONCAT(matchs.equipe_principale,' vs ',matchs.equipe_adverse) AS matchs,ventes.prix,ventes.nbr_billet,(ventes.prix*ventes.nbr_billet) AS total,ventes.datevente FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id;"); 
+        $listevente = \DB::select("SELECT ventes.id,clients.nom,clients.telephone,CONCAT(matchs.equipe_principale,' vs ',matchs.equipe_adverse) AS matchs,ventes.prix,zonesieges.numsiege,ventes.datevente FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id INNER JOIN zonesieges on zonesieges.id=ventes.place_id;"); 
         $fpdf->SetFont('Courier', 'B', 18);
         $fpdf->Cell(280,12,'LISTE DES VENTES DES BILLETS',1,0,'C');
         $fpdf->Ln();
-        $fpdf->Cell(65,6,'CLIENTS',1,0,'C');
+        $fpdf->Cell(75,6,'CLIENTS',1,0,'C');
         // $fpdf->Cell(50,6,'CONTACT',1,0,'C');
-        $fpdf->Cell(95,6,'MATCH',1,0,'C');
-        $fpdf->Cell(40,6,'PRIX',1,0,'C');
-        $fpdf->Cell(40,6,'NBR',1,0,'C');
-        $fpdf->Cell(40,6,'TOTAL',1,0,'C');
+        $fpdf->Cell(100,6,'MATCH',1,0,'C');
+        $fpdf->Cell(50,6,'PRIX',1,0,'C');
+        $fpdf->Cell(55,6,'NUMERO PLACE',1,0,'C');
         // $fpdf->Cell(45,6,'DATE',1,0,'C');
 
         $fpdf->Ln();
         foreach($listevente as $list){
             $fpdf->SetFont('Courier', 'B', 18);
     
-            $fpdf->Cell(65,8,$list->nom,1,0,'C');
+            $fpdf->Cell(75,8,$list->nom,1,0,'C');
             // $fpdf->Cell(30,8,$list->telephone,1,0,'C');
-            $fpdf->Cell(95,8,$list->matchs,1,0,'C');
-            $fpdf->Cell(40,8,$list->prix,1,0,'C');
-            $fpdf->Cell(40,8,$list->nbr_billet,1,0,'C');
-            $fpdf->Cell(40,8,$list->total,1,0,'C');
+            $fpdf->Cell(100,8,$list->matchs,1,0,'C');
+            $fpdf->Cell(50,8,$list->prix,1,0,'C');
+            $fpdf->Cell(55,8,$list->numsiege,1,0,'C');
             // $fpdf->Cell(45,8,$list->datevente,1,0,'C');
             
             $fpdf->Ln();       
@@ -239,23 +237,23 @@ class DashboardController extends Controller
     
         $listematch = \DB::select("SELECT matchs.id,stades.nom AS stade,champions.name AS champion,CONCAT(matchs.equipe_principale,' VS ', matchs.equipe_adverse) AS equipes,matchs.date_match,matchs.heure_match FROM matchs INNER JOIN stades ON stades.id=matchs.stade_id INNER JOIN champions ON champions.id=matchs.champions_id;"); 
         $fpdf->SetFont('Courier', 'B', 18);
-        $fpdf->Cell(280,12,'LISTE DES MATCHS',1,0,'C');
+        $fpdf->Cell(285,12,'LISTE DES MATCHS',1,0,'C');
         $fpdf->Ln();
-        $fpdf->Cell(60,6,'STADE',1,0,'C');
-        $fpdf->Cell(50,6,'CHAMPIONS',1,0,'C');
+        $fpdf->Cell(65,6,'STADE',1,0,'C');
+        $fpdf->Cell(55,6,'CHAMPIONS',1,0,'C');
         $fpdf->Cell(95,6,'EQUIPES',1,0,'C');
         $fpdf->Cell(45,6,'DATE',1,0,'C');
-        $fpdf->Cell(30,6,'HEURE',1,0,'C');
+        $fpdf->Cell(25,6,'HEURE',1,0,'C');
 
         $fpdf->Ln();
         foreach($listematch as $list){
             $fpdf->SetFont('Courier', 'B', 18);
     
-            $fpdf->Cell(60,8,$list->stade,1,0,'C');
-            $fpdf->Cell(50,8,$list->champion,1,0,'C');
+            $fpdf->Cell(65,8,$list->stade,1,0,'C');
+            $fpdf->Cell(55,8,$list->champion,1,0,'C');
             $fpdf->Cell(95,8,$list->equipes,1,0,'C');
             $fpdf->Cell(45,8,$list->date_match,1,0,'C');
-            $fpdf->Cell(30,8,$list->heure_match,1,0,'C');
+            $fpdf->Cell(25,8,$list->heure_match,1,0,'C');
             
             $fpdf->Ln();       
         }

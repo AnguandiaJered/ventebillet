@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Stade;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Zonesiege;
 
-class StadeController extends Controller
+class ZonesiegeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class StadeController extends Controller
      */
     public function index()
     {
-        $stade = Stade::latest()->get();
-        return view('pages.stade', compact('stade'));
+        $zonesiege = Zonesiege::latest()->get();
+        return view('pages.zonesiege', compact('zonesiege'));
     }
 
     /**
@@ -38,24 +37,21 @@ class StadeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom' => 'required',
-            'taille' => 'required',
-            'nbr_place' => 'required',
-            'emplacement' => 'required',
+            'numsiege' => 'required',
+            'sectionstade' => 'required',
         ]);
 
-        $stade = new Stade;
-        $stade->nom = $request->input('nom');
-        $stade->taille = $request->input('taille');
-        $stade->nbr_place = $request->input('nbr_place');    
-        $stade->emplacement = $request->input('emplacement');    
-        $stade->save();
+        $zonesiege = new Zonesiege();
+        
+        $zonesiege->numsiege = $request->input('numsiege');
+        $zonesiege->sectionstade = $request->input('sectionstade');
 
-        return redirect(route('stade.index'))->with([
+        $zonesiege->save();
+
+        return redirect(route('zonesiege.index'))->with([
             'message' => 'Successfully saved.!',
             'alert-type' => 'success',
-        ]); 
-       
+        ]);
     }
 
     /**
@@ -77,8 +73,8 @@ class StadeController extends Controller
      */
     public function edit($id)
     {
-        $stade = Stade::findOrFail($id);
-        return view('pages.stade', compact('stade'));
+        $zonesiege = Zonesiege::findOrFail($id);
+        return view('pages.zonesiege', compact('zonesiege'));
     }
 
     /**
@@ -88,23 +84,11 @@ class StadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'nom' => 'sometimes|string',
-        //     'taille' => 'sometimes|string',
-        //     'nbr_place' => 'sometimes|string',            
-        // ]);
-    
-        // $stade = new Stade;
-        // $stade->nom = $request->input('nom');
-        // $stade->taille = $request->input('taille');
-        // $stade->nbr_place = $request->input('nbr_place');    
-        // $stade->save();
-
-        \DB::update("UPDATE stades set nom = ?, taille = ?, nbr_place = ?, emplacement = ?  WHERE id= ? ", [$request->nom,$request->taille,$request->nbr_place,$request->emplacement,$request->id]);
-
-        return redirect(route('stade.index'))->with([
+        \DB::update("UPDATE zonesieges set numsiege = ?, sectionstade = ? WHERE id= ? ", [$request->numsiege,$request->sectionstade,$request->id]);
+        
+        return redirect(route('zonesiege.index'))->with([
             'message' => 'Successfully updated.!',
             'alert-type' => 'success',
         ]);
@@ -118,8 +102,8 @@ class StadeController extends Controller
      */
     public function destroy($id)
     {
-        Stade::find($id)->delete();
-        return redirect(route('stade.index'))->with([
+        Zonesiege::find($id)->delete();
+        return redirect(route('zonesiege.index'))->with([
             'message' => 'Successfully deleted.!',
             'alert-type' => 'success',
         ]);

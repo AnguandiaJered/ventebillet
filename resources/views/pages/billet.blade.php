@@ -33,14 +33,18 @@
         </div>
         <hr/>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <h1>GAME DATE</h1>
                 <h1><strong>{{$item->date_match}}</strong></h1>
             </div>        
           
-            <div class="col-md-6">
-                <h1 class="offset-5">GAME TIME</h1>
-                <h1 class="offset-4"><strong>{{$item->heure_match}}</strong></h1>
+            <div class="col-md-4">
+                <h1 class="">GAME TIME</h1>
+                <h1 class=""><strong>{{$item->heure_match}}</strong></h1>
+            </div>
+            <div class="col-md-4">
+                <h1 class="">SEAT NUMBER</h1>
+                <h1 class=""><strong>{{$item->numsiege}} {{$item->sectionstade}}</strong></h1>
             </div>
         </div>
         <hr/>
@@ -52,7 +56,7 @@
             </div>
             <div class="col-md-6">
                 <h1 class="offset-5">STADIUM</h1>
-                <h1 class="offset-4"><strong>{{$item->stade}}</strong></h1>
+                <h1 class="offset-3"><strong>{{$item->stade}}</strong></h1>
             </div>           
         </div>
         <hr/>

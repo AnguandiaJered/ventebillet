@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stades', function (Blueprint $table) {
+        Schema::create('zonesieges', function (Blueprint $table) {
             $table->id();
-            $table->string('nom')->unique();
-            $table->string('taille');
-            $table->integer('nbr_place');
-            $table->string('emplacement');
-            // $table->string('image')->nullable();
+            $table->string('numsiege');
+            $table->string('sectionstade');
+            $table->enum('status', ['vide', 'occuper'])->default('vide');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stades');
+        Schema::dropIfExists('zonesieges');
     }
 };

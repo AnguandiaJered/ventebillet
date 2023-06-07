@@ -10,7 +10,7 @@ class Vente extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['client_id','match_id','prix','nbr_billet','datevente'];
+    protected $fillable = ['client_id','match_id','prix','nbr_billet','datevente','place_id'];
 
     public function match(){
         return $this->belongsTo(Matchs::class,'match_id','id');
