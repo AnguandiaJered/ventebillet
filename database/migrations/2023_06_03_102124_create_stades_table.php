@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('taille');
             $table->integer('nbr_place');
             $table->string('emplacement');
-            // $table->string('image')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

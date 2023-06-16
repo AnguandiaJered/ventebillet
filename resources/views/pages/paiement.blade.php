@@ -32,8 +32,8 @@
                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm offset-10 mb-4"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Ajouter Client</a>
                    -->
-                        <div class="col-md-12 col-sm-12 text-right">							
-							<button data-toggle="modal" data-target="#myModal" class="btn btn-primary mt-3 mb-4">Effectuer l'opération</button>							
+                        <div class="col-md-12 col-sm-12 text-right">
+							<button data-toggle="modal" data-target="#myModal" class="btn btn-primary mt-3 mb-4">Effectuer l'opération</button>
 							<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
 							    <div role="document" class="modal-dialog">
                                     <div class="modal-content">
@@ -41,42 +41,42 @@
                                             <h5 id="exampleModalLabel" class="modal-title">Paramètrage des paiements</h5>
                                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                         </div>
-                                        <div class="modal-body col-md-12">						
-                                            <form id="forme" method="POST" action="{{ route('paiement.store')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                            @csrf								
+                                        <div class="modal-body col-md-12">
+                                            <form id="forme" method="POST" action="{{ route('paiement.store')}}" class="form-horizontal col-md-12" autocomplete="off">
+                                            @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 mt-3">
                                                         <div class="form-group">
                                                             <label for="vente_id">selectionner la vente</label>
                                                             <select class="form-control" name="vente_id">
                                                                 <option selected="">Choose...</option>
-                                                                @foreach ($client as $item)																				
+                                                                @foreach ($client as $item)
 																<option value="{{$item->id}}">{{$item->nom}}</option>
-																@endforeach	                                                            
+																@endforeach
                                                             </select>
-                                                        </div>                                                    
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="montant">Entré le montant</label>
                                                             <input type="number" class="form-control" name='montant' required />
-                                                        </div> 
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="devise">selectionner la devise</label>
                                                             <select class="form-control" name="devise">
-                                                                <option selected="">Choose...</option> 
-                                                                <option value="$">USD</option>                                                              												
+                                                                <option selected="">Choose...</option>
+                                                                <option value="$">USD</option>
                                                                 <option value="FC">FC</option>
                                                             </select>
-                                                        </div>                                                                                              
-                                                    </div>                                                                                                        
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">                               
+                                                <div class="form-group">
                                                     <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Enregistrer" />
-                                                </div>																							
+                                                </div>
                                             </form>
                                         </div>
-                                    </div>								                        
-                                </div>							
-							</div>							
+                                    </div>
+                                </div>
+							</div>
 						</div>
                     <!-- DataTales Example -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -97,7 +97,7 @@
                                             <th>Montant</th>
                                             <th>Devise</th>
                                             <th>Date Paiement</th>
-                                            <th>Action</th>                                            
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -107,7 +107,7 @@
                                             <th>Montant</th>
                                             <th>Devise</th>
                                             <th>Date Paiement</th>
-                                            <th>Action</th> 
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -119,39 +119,39 @@
                                                         <h5 id="exampleModalLabel" class="modal-title">Paramètrage des paiements</h5>
                                                         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                                     </div>
-                                                    <div class="modal-body col-md-12">						
-                                                        <form id="forme" method="POST" action="{{ route('paiement.update')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                                        @csrf	
-                                                        <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>															
+                                                    <div class="modal-body col-md-12">
+                                                        <form id="forme" method="POST" action="{{ route('paiement.update')}}" class="form-horizontal col-md-12" autocomplete="off">
+                                                        @csrf
+                                                        <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>
                                                             <div class="row">
                                                                 <div class="col-md-12 mt-3">
                                                                     <div class="form-group">
                                                                         <label for="vente_id">selectionner la vente</label>
-                                                                        <select class="form-control" name="vente_id" value="{{$item->vente_id}}">                                                                          																			
-                                                                            <option value="{{$item->vente_id}}">{{$item->vente_id}}</option>                                                            
+                                                                        <select class="form-control" name="vente_id" value="{{$item->vente_id}}">
+                                                                            <option value="{{$item->vente_id}}">{{$item->vente_id}}</option>
                                                                         </select>
-                                                                    </div>                                                    
+                                                                    </div>
                                                                     <div class="form-group">
                                                                         <label for="montant">Entré le montant</label>
                                                                         <input type="number" class="form-control" name='montant' value="{{$item->montant}}" required />
-                                                                    </div> 
+                                                                    </div>
                                                                     <div class="form-group">
                                                                         <label for="devise">selectionner la devise</label>
                                                                         <select class="form-control" name="devise" value="{{$item->devise}}">
                                                                             <!-- <option selected="">Choose...</option>  -->
-                                                                            <option value="$">USD</option>                                                              												
+                                                                            <option value="$">USD</option>
                                                                             <option value="FC">FC</option>
                                                                         </select>
-                                                                    </div>                                                                                              
-                                                                </div>                                                                                                        
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group">                               
+                                                            <div class="form-group">
                                                                 <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Modifier" />
-                                                            </div>																							
+                                                            </div>
                                                         </form>
                                                     </div>
-                                                </div>								                        
-                                            </div>							
+                                                </div>
+                                            </div>
                                         </div>
                                         <tr>
                                             <div class="modal fade" id="edit{{$item->id}}">
@@ -175,7 +175,7 @@
                                                     class="fas fa-print fa-sm text-white-50"></i> Print Ticket</a>
                                             </td>
                                         </tr>
-                                        @endforeach 
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

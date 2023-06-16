@@ -32,8 +32,8 @@
                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm offset-10 mb-4"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Ajouter Client</a>
                    -->
-                        <div class="col-md-12 col-sm-12 text-right">							
-							<button data-toggle="modal" data-target="#myModal" class="btn btn-primary mt-3 mb-4">Effectuer l'opération</button>							
+                        <div class="col-md-12 col-sm-12 text-right">
+							<button data-toggle="modal" data-target="#myModal" class="btn btn-primary mt-3 mb-4">Effectuer l'opération</button>
 							<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
 							    <div role="document" class="modal-dialog">
                                     <div class="modal-content">
@@ -41,35 +41,35 @@
                                             <h5 id="exampleModalLabel" class="modal-title">Paramètrage des zones de sieges</h5>
                                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                         </div>
-                                        <div class="modal-body col-md-12">						
-                                            <form id="forme" method="POST" action="{{ route('zonesiege.store')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                            @csrf								
+                                        <div class="modal-body col-md-12">
+                                            <form id="forme" method="POST" action="{{ route('zonesiege.store')}}" class="form-horizontal col-md-12" autocomplete="off">
+                                            @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 mt-3">
                                                         <div class="form-group">
                                                             <label for="numsiege">Entré le numero de siege</label>
                                                             <input type="text" class="form-control" name='numsiege' required />
-                                                        </div>                                                         
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="sectionstade">Entré la section de stade</label>
                                                             <input type="text" class="form-control" name='sectionstade' required />
-                                                        </div>                                                                                            
-                                                    </div>                                                                                                             
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">                               
+                                                <div class="form-group">
                                                     <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Enregistrer" />
-                                                </div>																							
+                                                </div>
                                             </form>
                                         </div>
-                                    </div>								                        
-                                </div>							
-							</div>							
+                                    </div>
+                                </div>
+							</div>
 						</div>
                     <!-- DataTales Example -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <a href="{{ route('reportchampions') }}" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                        </div>
+                        </div> -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Liste des nos championnats</h6>
@@ -104,31 +104,31 @@
                                                         <h5 id="exampleModalLabel" class="modal-title">Paramètrage des zones de sieges</h5>
                                                         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                                     </div>
-                                                    <div class="modal-body col-md-12">						
-                                                        <form id="forme" method="POST" action="{{ route('zonesiege.update')}}" class="form-horizontal col-md-12" autocomplete="off">	
-                                                        @csrf	
-                                                            <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>								
+                                                    <div class="modal-body col-md-12">
+                                                        <form id="forme" method="POST" action="{{ route('zonesiege.update')}}" class="form-horizontal col-md-12" autocomplete="off">
+                                                        @csrf
+                                                            <input type="hidden" name="id" id="id" value="{{$item->id}}" class="form-control" required/>
                                                             <div class="row">
                                                                 <div class="col-md-12 mt-3">
                                                                     <div class="form-group">
                                                                         <label for="numsiege">Entré nom</label>
                                                                         <input type="text" class="form-control" name='numsiege' value="{{$item->numsiege}}" required />
                                                                     </div>
-                                                                    
+
                                                                     <div class="form-group">
                                                                         <label for="country">Entré la section du stade</label>
                                                                         <input type="text" class="form-control" name='sectionstade' value="{{$item->sectionstade}}" required />
-                                                                    </div>                                                                                            
-                                                                </div>                                                                                                             
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group">                               
+                                                            <div class="form-group">
                                                                 <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Modifier" />
-                                                            </div>																							
+                                                            </div>
                                                         </form>
                                                     </div>
-                                                </div>								                        
-                                            </div>							
-                                        </div>	
+                                                </div>
+                                            </div>
+                                        </div>
                                         <tr>
                                             <div class="modal fade" id="edit{{$item->id}}">
                                                 <div class="modal-dialog modal-success">
@@ -140,16 +140,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <td>{{$item->id}}</td>                                         
-                                            <td>{{$item->numsiege}}</td>                                         
-                                            <td>{{$item->sectionstade}}</td> 
-                                            <td>{{$item->status}}</td> 
+                                            <td>{{$item->id}}</td>
+                                            <td>{{$item->numsiege}}</td>
+                                            <td>{{$item->sectionstade}}</td>
+                                            <td>{{$item->status}}</td>
                                             <td>
                                                 <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/zone-siege/'.$item->id}}".$id><i class="fa fa-edit"></i></a>
-                                                <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/zone-siege/'.$item->id}}" id="del" class="ml-3"><i class="fa fa-trash"></i></a>                                                        
-                                            </td>                                         
+                                                <a onclick= "return (confirm(' Voulez-vous supprimer vraiment cette information ?'));" href="{{'/zone-siege/'.$item->id}}" id="del" class="ml-3"><i class="fa fa-trash"></i></a>
+                                            </td>
                                         </tr>
-                                    @endforeach  
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

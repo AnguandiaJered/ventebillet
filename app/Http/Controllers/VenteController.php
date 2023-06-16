@@ -18,7 +18,7 @@ class VenteController extends Controller
     public function index()
     {
         $client = Client::latest()->get();
-        $match = Matchs::latest()->get();
+        $match = \DB::select("SELECT matchs.id,matchs.stade_id,matchs.champions_id,CONCAT(matchs.equipe_principale,' VS ', matchs.equipe_adverse) AS equipes,matchs.date_match,matchs.heure_match,stades.nom as stade,stades.emplacement,stades.photo,champions.name as championnat FROM matchs INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id order by id desc;");
         $zonesiege = \DB::select("SELECT * FROM `zonesieges` WHERE status='vide';");
         // $vente = Vente::with(['client','match'])->orderBy('id','desc')->paginate(10);
         $vente = \DB::select("SELECT * FROM ventes INNER JOIN clients ON clients.id=ventes.client_id INNER JOIN matchs ON matchs.id=ventes.match_id INNER JOIN zonesieges on zonesieges.id=ventes.place_id");
@@ -115,7 +115,7 @@ class VenteController extends Controller
         // $vente->prix = $request->input('prix');
         // $vente->nbr_billet = $request->input('nbr_billet');
         // $vente->save();
-  
+
         \DB::update("UPDATE ventes set client_id = ?, match_id = ?, prix = ?, place_id = ? WHERE id= ? ", [$request->client_id,$request->match_id,$request->prix,$request->place_id,$request->id]);
 
         return redirect(route('vente.index'))->with([

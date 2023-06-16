@@ -44,18 +44,23 @@ class StadeController extends Controller
             'emplacement' => 'required',
         ]);
 
-        $stade = new Stade;
-        $stade->nom = $request->input('nom');
-        $stade->taille = $request->input('taille');
-        $stade->nbr_place = $request->input('nbr_place');    
-        $stade->emplacement = $request->input('emplacement');    
-        $stade->save();
+        if(!is_null($request->photo)){
 
+            $new_name = time().'.'.$request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path('/storage/images'), $new_name);
+
+            $stade = new Stade;
+            $stade->nom = $request->input('nom');
+            $stade->taille = $request->input('taille');
+            $stade->nbr_place = $request->input('nbr_place');
+            $stade->emplacement = $request->input('emplacement');
+            $stade->photo = $new_name;
+            $stade->save();
+        }
         return redirect(route('stade.index'))->with([
             'message' => 'Successfully saved.!',
             'alert-type' => 'success',
-        ]); 
-       
+        ]);
     }
 
     /**
@@ -93,13 +98,13 @@ class StadeController extends Controller
         // $this->validate($request, [
         //     'nom' => 'sometimes|string',
         //     'taille' => 'sometimes|string',
-        //     'nbr_place' => 'sometimes|string',            
+        //     'nbr_place' => 'sometimes|string',
         // ]);
-    
+
         // $stade = new Stade;
         // $stade->nom = $request->input('nom');
         // $stade->taille = $request->input('taille');
-        // $stade->nbr_place = $request->input('nbr_place');    
+        // $stade->nbr_place = $request->input('nbr_place');
         // $stade->save();
 
         \DB::update("UPDATE stades set nom = ?, taille = ?, nbr_place = ?, emplacement = ?  WHERE id= ? ", [$request->nom,$request->taille,$request->nbr_place,$request->emplacement,$request->id]);

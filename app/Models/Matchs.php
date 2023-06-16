@@ -10,7 +10,7 @@ class Matchs extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['stade_id','champions_id','equipe_principale','equipe_adverse','date_match','heure_match'];
+    protected $fillable = ['stade_id','champions_id','equipe_principale','equipe_adverse','date_match','heure_match','prix','devise'];
 
     public function stade(){
         return $this->belongsTo(Stade::class,'stade_id','id');

@@ -50,6 +50,8 @@ class MatchController extends Controller
             'equipe_adverse' => 'required',
             'date_match' => 'required',
             'heure_match' => 'required',
+            'prix' => 'required',
+            'devise' => 'required',
         ]);
 
         $match = new Matchs;
@@ -59,6 +61,8 @@ class MatchController extends Controller
         $match->equipe_adverse = $request->input('equipe_adverse');
         $match->date_match = $request->input('date_match');
         $match->heure_match = $request->input('heure_match');
+        $match->prix = $request->input('prix');
+        $match->devise = $request->input('devise');
         $match->save();
 
         return redirect(route('match.index'))->with([
@@ -117,8 +121,8 @@ class MatchController extends Controller
         // $match->heure_match = $request->input('heure_match');
         // $match->save();
 
-        \DB::update("UPDATE matchs set stade_id = ?, champions_id = ?, equipe_principale = ?, equipe_adverse = ?, date_match = ?, heure_match =? WHERE id= ? ", [$request->stade_id,$request->champions_id,$request->equipe_principale,$request->equipe_adverse,$request->date_match,$request->heure_match,$request->id]);
-        
+        \DB::update("UPDATE matchs set stade_id = ?, champions_id = ?, equipe_principale = ?, equipe_adverse = ?, date_match = ?, heure_match =?, prix = ? , devise = ? WHERE id= ? ", [$request->stade_id,$request->champions_id,$request->equipe_principale,$request->equipe_adverse,$request->date_match,$request->heure_match,$request->prix,$request->devise,$request->id]);
+
         return redirect(route('match.index'))->with([
             'message' => 'Successfully updated.!',
             'alert-type' => 'success',

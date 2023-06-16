@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('equipe_adverse');
             $table->date('date_match');
             $table->string('heure_match');
+            $table->unsignedDecimal('prix');
+            $table->string('devise');
             $table->foreign('stade_id')->references('id')->on('stades');
             $table->foreign('champions_id')->references('id')->on('champions');
             $table->timestamps();
