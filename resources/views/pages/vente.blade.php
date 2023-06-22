@@ -184,7 +184,7 @@
                                             <td>{{$item->nom}}</td>
                                             <td>{{$item->date_match}}</td>
                                             <td>{{$item->prix}}</td>
-                                            <td>{{$item->numsiege}}</td>
+                                            <td>{{$item->numsiege}} {{$item->sectionstade}}</td>
                                             <td>{{$item->datevente}}</td>
                                             <!-- <td>
                                                 <a data-toggle="modal" data-target="#edit{{$item->id}}" href="{{'/vente/'.$item->id}}".$id><i class="fa fa-edit"></i></a>

@@ -16,8 +16,8 @@ class PaiementController extends Controller
     public function index()
     {
         $client = Client::latest()->get();
-        $paiement = Paiement::with(['vente'])->orderBy('id','desc')->paginate(10);
-       // $paiement = \DB::select("SELECT paiements.id,clients.nom,paiements.montant,paiements.devise,paiements.datepaie FROM paiements INNER JOIN ventes ON ventes.id=paiements.vente_id INNER JOIN clients ON clients.id=ventes.client_id;");
+        // $paiement = Paiement::with(['vente'])->orderBy('id','desc')->paginate(10);
+        $paiement = \DB::select("SELECT paiements.id,paiements.vente_id,clients.nom,paiements.montant,paiements.devise,paiements.datepaie FROM paiements INNER JOIN ventes ON ventes.id=paiements.vente_id INNER JOIN clients ON clients.id=ventes.client_id order by id desc;");
         return view('pages.paiement', compact('paiement','client'));
     }
 

@@ -89,7 +89,7 @@ Route::controller(VenteController::class)->group(function () {
 });
 
 //client root
-Route::get('/reservation/login', [ LoginController::class,'indexclient'])->name('client.login');
+Route::get('/reservation/login', [ LoginController::class,'clientlog'])->name('client.login');
 Route::get('/reservation/register', [ LoginController::class,'registeclient'])->name('client.register');
 Route::post('/reservation/register', [ LoginController::class,'registerclient'])->name('register.clients');
 Route::post('/reservation/login', [ LoginController::class,'loginclient'])->name('authenticate.login');
@@ -98,7 +98,6 @@ Route::get('/reservation/match', [ LoginController::class,'match'])->name('reser
 Route::post('/reservation/client', [ LoginController::class,'reserveclient'])->name('reservation.client');
 Route::get('/reservation/client', [ LoginController::class,'clientlist'])->name('list.client');
 Route::get('/reservation/liste', [ LoginController::class,'reservationindex'])->name('list.reservation');
-
 
 //admin
 Route::get('/login', [ LoginController::class,'index'])->name('login');

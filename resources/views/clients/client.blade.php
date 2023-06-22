@@ -38,7 +38,7 @@
                                                     <div class="col-md-12 mt-3">
                                                         <div class="form-group">
                                                             <label for="nom">Entré noms</label>
-                                                            <input type="text" class="form-control" name='nom' required />
+                                                            <input type="text" class="form-control" name='nom' value="{{Auth::user()->name}}" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="moderateur">Entré l'adresse</label>
@@ -46,18 +46,20 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="telephone">Entré le contact</label>
-                                                            <input type="tel" class="form-control" name='telephone' required />
+                                                            <input type="tel" class="form-control" name='telephone' value="{{Auth::user()->phone}}" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="mail">Entré le mail</label>
-                                                            <input type="email" class="form-control" name='mail' />
+                                                            <input type="email" class="form-control" name='mail' value="{{Auth::user()->email}}" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="submit" class="btn btn-primary col-md-3 mt-2" value="Suivant ->" />
+                                                <a href="{{ route('reservation.match')}}" class="detail-link btn btn-primary col-md-3 mt-2">Come back !<span class="ti-arrow-right"></span></a>
+                                                    <input type="submit" class="btn btn-primary col-md-3 mt-2" value="Suivant" />                                                  
                                                 </div>
                                             </form>
+                                            
                 </div>
                 </div>
                 </div>

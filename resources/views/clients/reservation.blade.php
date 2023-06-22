@@ -38,10 +38,10 @@
                                                         <div class="form-group">
                                                             <label for="client_id">selectionner le client</label>
                                                             <select class="form-control" name="client_id">
-                                                                <option selected="">Choose...</option>
+                                                                <!-- <option selected="">Choose...</option> -->
                                                                 @foreach ($client as $item)
-																<option value="{{$item->id}}">{{$item->nom}}</option>
-																@endforeach
+																<option value="{{$item->id}}">{{Auth::user()->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -69,7 +69,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="submit" class="btn btn-primary col-md-5 mt-2" value="Enregistrer" />
+                                                <a href="{{ route('list.client')}}" class="detail-link btn btn-primary col-md-3 mt-2">Come back !<span class="ti-arrow-right"></span></a>
+                                                    <input type="submit" class="btn btn-primary col-md-3 mt-2" value="Enregistrer" />
                                                 </div>
                                             </form>
                 </div>

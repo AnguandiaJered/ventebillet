@@ -165,7 +165,7 @@
                                                 </div>
                                             </div>
                                             <td>{{$item->id}}</td>
-                                            <td>{{$item->vente_id}}</td>
+                                            <td>{{$item->nom}}</td>
                                             <td>{{$item->montant}}</td>
                                             <td>{{$item->devise}}</td>
                                             <td>{{$item->datepaie}}</td>

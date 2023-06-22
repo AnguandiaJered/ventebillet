@@ -60,7 +60,7 @@
                                 <p class="card-text">ADRESSE : {{$item->emplacement}}</p>
                                 <p class="card-text">PRIX D'ENTREE : {{$item->prix}}{{$item->devise}}</p>
                                 <p class="card-text">DATE : {{$item->date_match}}, TIME : {{$item->heure_match}}</p>
-                                <a href="{{ route('list.client')}}" class="detail-link">Reserver la place <span class="ti-arrow-right"></span></a>
+                                <a href="{{ route('client.login')}}" class="detail-link">Reserver la place <span class="ti-arrow-right"></span></a>
                             </div>
                         </div>
                     </div>

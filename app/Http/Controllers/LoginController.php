@@ -82,37 +82,37 @@ class LoginController extends Controller
             $user->verified = true;
             $user->save();
 
-            return view('client.login');
+            return view('clients.login');
     }
 
 
-    public function indexclient()
+    public function clientlog()
     {
-        return view('client.login');
+        return view('clients.login');
     }
 
     public function reservationindex()
     {
-        $client = Client::latest()->get();
+        $client = \DB::select("SELECT * FROM `clients` order by id desc Limit 1;");
         $zonesiege = \DB::select("SELECT * FROM `zonesieges` WHERE status='vide';");
         $matchs = \DB::select("SELECT matchs.id,matchs.stade_id,matchs.champions_id,CONCAT(matchs.equipe_principale,' VS ', matchs.equipe_adverse) AS equipes,matchs.date_match,matchs.heure_match,stades.nom as stade,stades.emplacement,stades.photo,champions.name as championnat FROM matchs INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id order by id desc;");
-        return view('client.reservation', compact('client','matchs','zonesiege'));
+        return view('clients.reservation', compact('client','matchs','zonesiege'));
     }
 
     public function clientlist()
     {
-        return view('client.client');
+        return view('clients.client');
     }
 
     public function registeclient()
     {
-        return view('client.register');
+        return view('clients.register');
     }
 
     public function match()
     {
         $match = \DB::select("SELECT matchs.id,matchs.stade_id,matchs.champions_id,CONCAT(matchs.equipe_principale,' VS ', matchs.equipe_adverse) AS equipes,matchs.date_match,matchs.heure_match,stades.nom as stade,stades.emplacement,stades.photo,champions.name as championnat,matchs.prix,matchs.devise FROM matchs INNER JOIN stades on stades.id=matchs.stade_id INNER JOIN champions on champions.id=matchs.champions_id order by id desc;");
-        return view('client.match', compact('match'));
+        return view('clients.match', compact('match'));
     }
 
     public function loginclient(Request $request)
@@ -124,7 +124,7 @@ class LoginController extends Controller
                 'alert-type' => 'success',
             ]);
         }
-        return view('client.login');
+        return view('clients.login');
     }
 
     public function reserveclient(Request $request)
